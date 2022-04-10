@@ -137,5 +137,90 @@ const showForecastInfo = (forecastArray) =>{
 
 }
 
+convertButtons.addEventListener('click', (e)=>{
 
+    delete activeElement.dataset.active
+    convertButtons.children[e.target.dataset.id].dataset.active = true    
+    showWeatherInfo(dataObject)
+    showForecastInfo(forecast.dailyForecast)
+    showHourlyData(filterHourlyData(forecast.hourlyForecast).firstGroup, 
+                   filterHourlyData(forecast.hourlyForecast).secondGroup, 
+                   filterHourlyData(forecast.hourlyForecast).thirdGroup)
+
+    
+
+
+}) 
+
+searchButton.addEventListener('click', async ()=>{
+    const inputValue = document.getElementById('location')
+    dataObject = await fetched.getData(inputValue.value).catch(err=> console.log(err))
+    forecast = await fetched.getForecast(dataObject.coordinates).catch(err=>console.log(err))
+    showWeatherInfo(dataObject)
+    showForecastInfo(forecast.dailyForecast)
+    showHourlyData(filterHourlyData(forecast.hourlyForecast).firstGroup,
+               filterHourlyData(forecast.hourlyForecast).secondGroup, 
+               filterHourlyData(forecast.hourlyForecast).thirdGroup)
+    inputValue.value = ''
+
+
+})
+
+dailyBtn.addEventListener('click', ()=>{
+hourlyForecastContent.classList.add('no-display')
+document.querySelector('.arrow-radios').classList.add('no-display')
+forecastContainer.style.display = 'flex'
+
+
+})
+
+
+hourlyBtn.addEventListener('click', ()=>{
+hourlyForecastContent.classList.remove('no-display')
+document.querySelector('.arrow-radios').classList.remove('no-display')
+forecastContainer.style.display = 'none'
+
+})
+
+// Hourly data carrousel
+arrowBtns.forEach(arrowBtn => {
+    arrowBtn.addEventListener('click', ()=>{
+        const next = arrowBtn.dataset.button === 'next' ? 1 : -1
+        const radio = document.querySelector('.radioBtns')
+
+        let activeElement = hourlyForecastContent.querySelector('[data-active]')
+        let newIndex = [...hourlyForecastContent.children].indexOf(activeElement) + next
+         
+    
+        if(newIndex < 0) newIndex = hourlyForecastContent.children.length - 1
+        if(newIndex >= hourlyForecastContent.children.length) newIndex = 0
+        delete activeElement.dataset.active
+      
+        hourlyForecastContent.children[newIndex].dataset.active = true
+        radio.children[newIndex].checked = true
+        
+})
+
+})
+
+
+
+radioBtns.forEach(btn =>{
+    btn.addEventListener('click', (e)=>{
+        const activeElement = hourlyForecastContent.querySelector('[data-active]');
+        delete activeElement.dataset.active
+        hourlyForecastContent.children[e.target.dataset.id].dataset.active = true;
+        
+    })
+     
+
+
+})
+
+
+showWeatherInfo(dataObject)
+showForecastInfo(forecast.dailyForecast)
+showHourlyData(filterHourlyData(forecast.hourlyForecast).firstGroup,
+               filterHourlyData(forecast.hourlyForecast).secondGroup, 
+               filterHourlyData(forecast.hourlyForecast).thirdGroup)
 })();

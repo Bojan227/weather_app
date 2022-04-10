@@ -1,0 +1,38 @@
+.daily-forecast {
+    display: flex;
+}
+
+.daily-forecast>div {
+    border: 2px solid black;
+}
+
+.dailyTitle {
+    display: flex;
+    gap: 20px;
+}
+
+.hourly {
+    display: flex;
+    gap: 30px;
+}
+
+.arrow-radios {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+}
+
+.hourly-forecast>* {
+    display: none;
+
+}
+
+.hourly-forecast>[data-active] {
+    display: flex;
+    border: 2px solid black;
+
+}
+
+.no-display {
+    display: none;
+}
