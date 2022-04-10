@@ -6,11 +6,75 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
+
 </head>
 
 <body>
 
-    <script src="./index.js"></script>
+    <input type="text" id="location">
+    <button class="getData">Search</button>
+
+    <div class="convertButtons">
+        <button class="celsius" data-id="0">Celsius</button>
+        <button class="fahrenheit" data-active="true" data-id="1">Fahrenheit</button>
+    </div>
+
+    <main>
+        <div class="container">
+            <div class="currentWeather">
+                <h3 class="weather-desc"></h3>
+                <h3 class="city-name"></h3>
+                <h5 class="todays-date"></h5>
+                <h5 class="time"></h5>
+                <h3 class="show-temp"></h3>
+            </div>
+
+            <div class="additionalInfo">
+                <h3 class="feels-like"></h3>
+                <h3 class="humidity"></h3>
+                <h3 class="chance-of-rain"></h3>
+                <h3 class="wind-speed"></h3>
+            </div>
+
+
+        </div>
+        <div class="dailyTitle">
+            <h2 class="daily-btn">Daily</h2>
+            <div class="hourly">
+                <h2 class="hourly-btn">Hourly</h2>
+                <div class="arrow-radios no-display">
+
+                    <h3 class="button-carrousel arrowLeft" data-button="prev">&#8656;</h3>
+                    <div class="radioBtns">
+                        <input type="radio" name="radio" id="radio1" data-id='0' checked>
+                        <input type="radio" name="radio" id="radio1" data-id='1'>
+                        <input type="radio" name="radio" id="radio1" data-id='2'>
+                    </div>
+
+                    <h3 class="button-carrousel arrowRight" data-button="next">&#8658;</h3>
+                </div>
+            </div>
+
+        </div>
+        <div class="daily-forecast">
+
+
+
+        </div>
+        <div class="hourly-forecast no-display">
+            <div class="first-group" data-active="true">
+
+            </div>
+            <div class="second-group">
+
+            </div>
+            <div class="third-group">
+
+            </div>
+        </div>
+    </main>
+
+
 </body>
 
 </html>
