@@ -17,7 +17,7 @@ const fetched = (() =>{
         const coordinates = data.coord
         const dayTime = data.dt
         
-        console.log(data)
+       
 
         return {temp, feelsLike, dayTime, humidity, windSpeed, weatherDescription, cityName, coordinates}
         
@@ -28,7 +28,7 @@ const fetched = (() =>{
             mode:'cors'
         });
         const data = await response.json()
-        console.log(data)
+        
         data.daily.shift()
         const dailyForecast = data.daily
         const hourlyForecast = data.hourly

@@ -1,14 +1,95 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 1.8rem;
+    background-image: url('./background-img.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: whitesmoke;
+}
+
+
+
+.container {
+    display: flex;
+    gap: 20px;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    min-height: 40vh;
+}
+
+.currentWeather {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.additionalInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.forecast-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 60vh;
+    width: 100%;
+    justify-content: flex-end;
+
+}
+
 .daily-forecast {
     display: flex;
+    align-items: flex-end;
+    gap: 15px;
+    justify-content: space-around;
+    padding: 25px;
+
 }
 
 .daily-forecast>div {
-    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
 }
+
+
 
 .dailyTitle {
     display: flex;
     gap: 20px;
+    padding: 10px 30px;
+    cursor: pointer;
+}
+
+.convertButtons {
+    cursor: pointer;
+}
+
+img.celsius {
+    margin-right: 15px;
+}
+
+.search-bar {
+    display: flex;
+    gap: 15px;
+    cursor: pointer;
+}
+
+.search-bar>input {
+    border: 0;
+    padding: 5px 20px;
+    background-color: black;
+    color: white;
+    border-radius: 15px;
 }
 
 .hourly {
@@ -16,21 +97,53 @@
     gap: 30px;
 }
 
+.hourly-forecast {
+    width: 100%;
+    padding: 20px;
+}
+
 .arrow-radios {
     display: flex;
     cursor: pointer;
     align-items: center;
+    gap: 20px;
+
+}
+
+.daily-btn,
+.hourly-btn {
+    cursor: pointer;
+    padding: 15px 50px;
+    border: 2px solid white;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
 }
 
 .hourly-forecast>* {
     display: none;
-
+    width: 100%;
 }
 
 .hourly-forecast>[data-active] {
     display: flex;
-    border: 2px solid black;
+    justify-content: space-around;
 
+    padding: 15px;
+
+}
+
+.hourly-forecast>[data-active]>div {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.radioBtns {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
 }
 
 .no-display {

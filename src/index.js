@@ -7,10 +7,11 @@ const showData = (async()=>{
 let dataObject = await fetched.getData('Tokyo').catch(err=> console.log(err))
 let forecast = await fetched.getForecast(dataObject.coordinates).catch(err=>console.log(err))
 
+
 const temperatureTextElement = document.querySelector('.show-temp')
 const feelsLikeTextElement = document.querySelector('.feels-like')
 const humidityTextElement = document.querySelector('.humidity')
-const chanceOfRainTextElement = document.querySelector('.chance-of-rain')
+
 const windSpeedTextElement = document.querySelector('.wind-speed')
 const weatherDescriptionTextElement = document.querySelector('.weather-desc')
 const cityNameTextElement = document.querySelector('.city-name')
@@ -31,10 +32,11 @@ const {convertToCelsius,
     convertToFahrenheit,
     convertToMph,
     convertToKmh,
-    daysInWeek,
+    capitalizeFirstLetter,
     todaysDate,
     hourAndMinutes,
     dayOfTheWeek,
+    daysInWeek,
     
 } = convertValues
 
@@ -50,7 +52,6 @@ const filterDaysInWeek = () => {
 
 }
 
-
 const filterHourlyData = (arr)=>{
 
     const firstGroup = arr.slice(1, 9)
@@ -65,7 +66,7 @@ const createHourlyForecastElements = (dt, tempInp, container)=>{
     const cardContainer = document.createElement('div')
     
     const currentHour = document.createElement('h3')
-    const currentTemp = document.createElement('h3')
+    const currentTemp = document.createElement('h6')
     
     currentHour.textContent = new Date(dt * 1000).toLocaleTimeString([], {
         hour: '2-digit',
@@ -79,7 +80,6 @@ const createHourlyForecastElements = (dt, tempInp, container)=>{
 
 const hourlyDataSplitted = (arr, num) => {
     arr.forEach(element => {
-
         createHourlyForecastElements(element.dt, element.temp, hourlyForecastContent.children[num])
 
     })
@@ -105,7 +105,7 @@ const showWeatherInfo = (mainObject)=>{
     feelsLikeTextElement.textContent = changeTemperature(mainObject.feelsLike)
     windSpeedTextElement.textContent = changeWindSpeed(mainObject.windSpeed)
     humidityTextElement.textContent = `${mainObject.humidity} %`
-    weatherDescriptionTextElement.textContent =  mainObject.weatherDescription
+    weatherDescriptionTextElement.textContent = capitalizeFirstLetter(mainObject.weatherDescription) 
     cityNameTextElement.textContent = mainObject.cityName
     dateTxtElement.textContent = todaysDate(forecast.timezone)
     timeTxtElement.textContent = hourAndMinutes(forecast.timezone)
@@ -115,8 +115,8 @@ const showWeatherInfo = (mainObject)=>{
 const createDailyForecastElements = (dayInp, tempInp, fLikeInp, container)=>{
     const div = document.createElement('div')
     const day = document.createElement('h3')
-    const temp = document.createElement('h3')
-    const feelLike = document.createElement('h3')
+    const temp = document.createElement('h5')
+    const feelLike = document.createElement('h6')
 
     day.textContent = dayInp
     temp.textContent = changeTemperature(tempInp)
@@ -217,10 +217,15 @@ radioBtns.forEach(btn =>{
 
 })
 
+// const setBackground = () => {
+//     backgroundImg.style.backgroundImage = bgImg
+// }
 
+// setBackground()
 showWeatherInfo(dataObject)
 showForecastInfo(forecast.dailyForecast)
 showHourlyData(filterHourlyData(forecast.hourlyForecast).firstGroup,
                filterHourlyData(forecast.hourlyForecast).secondGroup, 
                filterHourlyData(forecast.hourlyForecast).thirdGroup)
+
 })();
