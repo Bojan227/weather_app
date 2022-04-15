@@ -85,11 +85,16 @@ img.celsius {
 }
 
 .search-bar>input {
-    border: 0;
+    border: 2px solid whitesmoke;
     padding: 5px 20px;
-    background-color: black;
+    background-color: inherit;
     color: white;
     border-radius: 15px;
+
+}
+
+::placeholder {
+    color: whitesmoke;
 }
 
 .hourly {

@@ -34,13 +34,10 @@ const convertValues  = (()=>{
         return newString
         
     }
-
-
-    const timestamp = new Date ()
-    const dayOfTheWeek = timestamp.getDay() + 1
+    const dayOfTheWeek = new Date().getDay() + 1
     
     const todaysDate = (tZone) => {
-        return timestamp.toLocaleDateString("en-US", {
+        return new Date().toLocaleDateString("en-US", {
             weekday: 'long',
             day: 'numeric',
             month: 'long',
@@ -51,7 +48,7 @@ const convertValues  = (()=>{
 
     }
     const hourAndMinutes = (tZone) => {
-        return timestamp.toLocaleTimeString('en-US', {
+        return new Date().toLocaleTimeString('en-US', {
             hour: '2-digit',
             minute: '2-digit',
             timeZone: tZone

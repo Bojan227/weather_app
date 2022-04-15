@@ -1,12 +1,15 @@
 import './style.css';
 import convertValues from './converter';
 import fetched from './fetch';
+import setIcons from './icons';
 
 
 const showData = (async()=>{
 let dataObject = await fetched.getData('Tokyo').catch(err=> console.log(err))
 let forecast = await fetched.getForecast(dataObject.coordinates).catch(err=>console.log(err))
 
+
+const refreshBtn = document.querySelector('.refresh')
 
 const temperatureTextElement = document.querySelector('.show-temp')
 const feelsLikeTextElement = document.querySelector('.feels-like')
@@ -151,11 +154,22 @@ convertButtons.addEventListener('click', (e)=>{
 
 
 }) 
+refreshBtn.addEventListener('click', async ()=>{
+    showWeatherInfo(dataObject)
+    showForecastInfo(forecast.dailyForecast)
+    showHourlyData(filterHourlyData(forecast.hourlyForecast).firstGroup, 
+                   filterHourlyData(forecast.hourlyForecast).secondGroup, 
+                   filterHourlyData(forecast.hourlyForecast).thirdGroup)
+
+})    
+
+
 
 searchButton.addEventListener('click', async ()=>{
     const inputValue = document.getElementById('location')
     dataObject = await fetched.getData(inputValue.value).catch(err=> console.log(err))
     forecast = await fetched.getForecast(dataObject.coordinates).catch(err=>console.log(err))
+
     showWeatherInfo(dataObject)
     showForecastInfo(forecast.dailyForecast)
     showHourlyData(filterHourlyData(forecast.hourlyForecast).firstGroup,
@@ -203,8 +217,6 @@ arrowBtns.forEach(arrowBtn => {
 
 })
 
-
-
 radioBtns.forEach(btn =>{
     btn.addEventListener('click', (e)=>{
         const activeElement = hourlyForecastContent.querySelector('[data-active]');
@@ -217,15 +229,12 @@ radioBtns.forEach(btn =>{
 
 })
 
-// const setBackground = () => {
-//     backgroundImg.style.backgroundImage = bgImg
-// }
-
-// setBackground()
+setIcons()
 showWeatherInfo(dataObject)
 showForecastInfo(forecast.dailyForecast)
 showHourlyData(filterHourlyData(forecast.hourlyForecast).firstGroup,
                filterHourlyData(forecast.hourlyForecast).secondGroup, 
                filterHourlyData(forecast.hourlyForecast).thirdGroup)
+
 
 })();
