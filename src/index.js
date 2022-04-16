@@ -5,8 +5,8 @@ import setIcons from './icons';
 
 
 const showData = (async()=>{
-let dataObject = await fetched.getData('Tokyo').catch(err=> console.log(err))
-let forecast = await fetched.getForecast(dataObject.coordinates).catch(err=>console.log(err))
+let dataObject = await fetched.getData('Tokyo')
+let forecast = await fetched.getForecast(dataObject.coordinates)
 
 
 const refreshBtn = document.querySelector('.refresh')
@@ -167,8 +167,8 @@ refreshBtn.addEventListener('click', async ()=>{
 
 searchButton.addEventListener('click', async ()=>{
     const inputValue = document.getElementById('location')
-    dataObject = await fetched.getData(inputValue.value).catch(err=> console.log(err))
-    forecast = await fetched.getForecast(dataObject.coordinates).catch(err=>console.log(err))
+    dataObject = await fetched.getData(inputValue.value)
+    forecast = await fetched.getForecast(dataObject.coordinates)
 
     showWeatherInfo(dataObject)
     showForecastInfo(forecast.dailyForecast)

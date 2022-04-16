@@ -1,25 +1,33 @@
+const errorMsg = document.querySelector('.error-msg')
+
 const fetched = (() =>{
     const baseUrl = 'https://api.openweathermap.org/data/2.5/weather?'
     const forecastUrl = 'https://api.openweathermap.org/data/2.5/onecall?'
 
     const getData = async (city) => {
-        const response = await fetch(`${baseUrl}q=${city}&appid=5d115994379e025f0b1d68172d59f3b5`, {
-            mode: "cors"
-        });
-        const data = await response.json();
-
-        const temp = data.main.temp
-        const feelsLike = data.main.feels_like
-        const humidity = data.main.humidity
-        const windSpeed = data.wind.speed
-        const weatherDescription = data.weather[0].description
-        const cityName = data.name
-        const coordinates = data.coord
-        const dayTime = data.dt
-        
-       
-
-        return {temp, feelsLike, dayTime, humidity, windSpeed, weatherDescription, cityName, coordinates}
+        try{
+            errorMsg.textContent = ''
+            const response = await fetch(`${baseUrl}q=${city}&appid=5d115994379e025f0b1d68172d59f3b5`, {
+                mode: "cors"
+            });
+            const data = await response.json();
+    
+            const temp = data.main.temp
+            const feelsLike = data.main.feels_like
+            const humidity = data.main.humidity
+            const windSpeed = data.wind.speed
+            const weatherDescription = data.weather[0].description
+            const cityName = data.name
+            const coordinates = data.coord
+            const dayTime = data.dt
+            
+           
+            
+            return {temp, feelsLike, dayTime, humidity, windSpeed, weatherDescription, cityName, coordinates}
+        }
+       catch(err){
+           errorMsg.textContent = 'Location not Found'
+       }
         
     };
 
